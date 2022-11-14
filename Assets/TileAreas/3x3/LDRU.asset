@@ -39,6 +39,9 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
+    _name: main
+    _width: 3
+    _height: 3
   backgroundTiles:
     innerTiles:
     - tiles: 
@@ -59,6 +62,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    _name: background
+    _width: 3
+    _height: 3
   foregroundTiles:
     innerTiles:
     - tiles: 
@@ -79,6 +85,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    _name: foreground
+    _width: 3
+    _height: 3
   climbTiles:
     innerTiles:
     - tiles: 
@@ -99,6 +108,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    _name: climb
+    _width: 3
+    _height: 3
   grabTiles:
     innerTiles:
     - tiles: 
@@ -119,6 +131,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    _name: grab
+    _width: 3
+    _height: 3
   maxCharacterHeight: 1
   minJumpSize: 1
   maxCharacterWidth: 1

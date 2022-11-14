@@ -71,11 +71,14 @@ public class Layer {
     [SerializeField]
     private TilePreset[] innerTiles = new TilePreset[0];
 
-    [SerializeField] public string Name { get; }
-    [SerializeField] public int Width { get; private set; }
-    [SerializeField] public int Height { get; private set; }
+    [SerializeField] private string _name;
+    public string Name => _name;
+    [SerializeField] private int _width;
+    public int Width => _width;
+    [SerializeField] private int _height;
+    public int Height => _height;
     public Layer(string name) {
-        this.Name = name;
+        this._name = name;
     }
     
     private int GetIndex(int x, int y)
@@ -83,8 +86,8 @@ public class Layer {
 
     public TilePreset[,] Tiles {
         set {
-            Width = value.GetLength(0);
-            Height = value.GetLength(1);
+            _width = value.GetLength(0);
+            _height = value.GetLength(1);
             innerTiles = new TilePreset[Width * Height];
             for(int x = 0; x < Width; x++) {
                 for(int y = 0; y < Height; y++) {
@@ -112,8 +115,8 @@ public class Layer {
                 res[x, y] = this[x, y].Copy();
             }
         }
-        res.Width = Width;
-        res.Height = Height;
+        res._width = Width;
+        res._height = Height;
         return res;
     }
 }
@@ -289,18 +292,25 @@ public class TilePreset : IList<(TileType tile, List<Condition>)>
 [Serializable]
 public class Condition
 {
-    public Condition(Vector2Int where, bool positive, TileType what)
+    public Condition(Vector2Int where, bool positive, bool mandatory, TileType what)
     {
-        this.Where = where;
-        this.Positive = positive;
-        this.What = what;
+        this._where = where;
+        this._positive = positive;
+        this._what = what;
+        this._mandatory = mandatory;
     }
     [SerializeField]
-    public Vector2Int Where { get; }
+    private Vector2Int _where;
+    public Vector2Int Where => _where;
     [SerializeField]
-    public bool Positive { get; }
+    private bool _positive;
+    public bool Positive => _positive;
     [SerializeField]
-    public TileType What { get; }
+    private bool _mandatory;
+    public bool Mandatory => _mandatory;
+    [SerializeField]
+    private TileType _what;
+    public TileType What => _what;
 
     public virtual bool Evaluate(TileType[,] tiles)
     {
@@ -308,6 +318,6 @@ public class Condition
         return (Positive && tile == What) || (!Positive && tile != What);
     }
     public Condition Copy() {
-        return new Condition(new Vector2Int(Where.x, Where.y), Positive, What);
+        return new Condition(new Vector2Int(Where.x, Where.y), Positive, Mandatory, What);
     }
 }

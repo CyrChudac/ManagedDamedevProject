@@ -42,7 +42,7 @@ public class TileArea_Window : EditorWindow
                 for(int y = 0; y < size.y; y++) {
                     foreach(var (type, conds) in layer[x, y]) {
                         drawer.Values[x, y].Add((type, 
-                            conds.Select(c => new CondWrapper(c.Where, c.What, c.Positive)).ToList()));
+                            conds.Select(c => new CondWrapper(c.Where, c.What, c.Positive, c.Mandatory)).ToList()));
                     }
                 }
             }
@@ -91,7 +91,7 @@ public class TileArea_Window : EditorWindow
                     preset[x, y] = new TilePreset();
                     foreach(var (type, conds) in drawer.Values[x, y]) {
                         preset[x, y].Add((type, conds
-                            .Select(c => new Condition(c.Where, c.Positive, c.What))
+                            .Select(c => new Condition(c.Where, c.Positive, c.Mandatory, c.What))
                             .ToList()));
                     }
                 }
@@ -215,7 +215,7 @@ class GridTileDrawer {
             int min = int.MaxValue;
             TileType result = TileType.NONE;
             foreach(var v in val) {
-                if(v.Item2.Count < min) {
+                if(v.Item1 != TileType.NONE && v.Item2.Count < min) {
                     min = v.Item2.Count;
                     result = v.Item1;
                 }
@@ -347,12 +347,17 @@ class GridTileDrawer {
                 positive = EditorGUILayout.Toggle("positive", positive);
                 Values[selected.Value.x, selected.Value.y][i].cond[j].Positive = positive;
                 GUILayout.EndVertical();
+                GUILayout.BeginVertical(GUILayout.Width(100));
+                var mandatory = Values[selected.Value.x, selected.Value.y][i].cond[j].Mandatory;
+                mandatory = EditorGUILayout.Toggle("mandatory", mandatory);
+                Values[selected.Value.x, selected.Value.y][i].cond[j].Mandatory = mandatory;
+                GUILayout.EndVertical();
 
                 GUILayout.EndHorizontal();
             }
             GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
             if (GUILayout.Button(new GUIContent("+", "Add Condition."))) {
-                Values[selected.Value.x, selected.Value.y][i].cond.Add(new CondWrapper(Vector2Int.zero, TileType.NONE, true));
+                Values[selected.Value.x, selected.Value.y][i].cond.Add(new CondWrapper(Vector2Int.zero, TileType.NONE, true, false));
             }
             GUILayout.EndHorizontal();
 
@@ -380,9 +385,11 @@ public class CondWrapper {
     public Vector2Int Where { get; set; }
     public TileType What { get; set; }
     public bool Positive { get; set; }
-    public CondWrapper(Vector2Int where, TileType what, bool positive) {
+    public bool Mandatory { get; set;  }
+    public CondWrapper(Vector2Int where, TileType what, bool positive, bool mandatory) {
         Where = where;
         What = what;
         Positive = positive;
+        Mandatory = mandatory;
     }
 }

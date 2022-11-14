@@ -173,6 +173,7 @@ MonoBehaviour:
   tilemaps:
   - {fileID: 330388728}
   mapping: {fileID: 11400000, guid: a7c6a5212e53d50478ce90ffe3c5fa3f, type: 2}
+  OnlyShowThis: {fileID: 11400000, guid: ee188af6dc78cb74f8b15917fe7a97fa, type: 2}
 --- !u!4 &158140225
 Transform:
   m_ObjectHideFlags: 0

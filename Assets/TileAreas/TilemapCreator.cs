@@ -67,27 +67,43 @@ public class TilemapCreator : MonoBehaviour
             tileAreas[a.openTo].Add(a);
         }
     }
+    public TileArea OnlyShowThis = null;
 
-    void Start() { 
-        InitializeDictionary();
-        CreateGrids();
+    void Start() {
+        if(OnlyShowThis == null) {
+            InitializeDictionary();
+            CreateGrids();
+        } else {
+            SetTilemapsForTileArea(0, 0, OnlyShowThis, tilemaps);
+        }
     }
 
     TileType TilePresetToTile(TilePreset tp, TileType[,] current) {
         List<TileType> possibles = new List<TileType>();
+        TileType? mandatory = null;
         foreach(var item in tp) {
             bool ok = true;
             foreach(var c in item.Item2) {
+                if(c.Mandatory)
+                    mandatory = item.tile;
                 if(!c.Evaluate(current)) {
                     ok = false;
                     break;
                 }
             }
+            if(mandatory.HasValue) {
+                if(ok)
+                    break;
+                else
+                    mandatory = null;
+            }
             if(ok) {
                 possibles.Add(item.tile);
             }
         }
-        if(possibles.Count == 0)
+        if(mandatory.HasValue)
+            return mandatory.Value;
+        if(possibles.Count == 0 )
             return TileType.NONE;
         return possibles[Random.Range(0, possibles.Count)];
     }
@@ -105,8 +121,8 @@ public class TilemapCreator : MonoBehaviour
 
     TileBase?[,] AreaToTiles(Layer ta) {
         TileType[,] types = new TileType[ta.Width, ta.Height];
-        for(int x = 0; x < ta.Width; x++) {
-            for(int y = 0; y < ta.Height; y++) {
+        for(int y = 0; y < ta.Height; y++) {
+            for(int x = 0; x < ta.Width; x++) {
                 types[x, y] = TilePresetToTile(ta[x, y], types);
             }
         }
@@ -119,6 +135,10 @@ public class TilemapCreator : MonoBehaviour
         return result;
     }
 
+    void SetTile(Tilemap map, int x, int y, TileBase tile) {
+        map.SetTile(new Vector3Int(x, -y), tile);
+    } 
+
     void SetTilemapsForTileArea(int x, int y, TileArea area, List<Tilemap> tilemaps) {
         int i = 0;
         foreach(Layer layer in area) {
@@ -126,9 +146,8 @@ public class TilemapCreator : MonoBehaviour
             for(int x2 = 0; x2 < layer.Width; x2++) {
                 for(int y2 = 0; y2 < layer.Height; y2++) {
                     if(tiles[x2,y2] != null)
-                        tilemaps[i].SetTile(
-                            new Vector3Int(x * tileSize.x + x2 - wholeSize.x / 2,
-                                y * tileSize.y + y2 - wholeSize.y / 2),
+                        SetTile(tilemaps[i], x * tileSize.x + x2 - wholeSize.x / 2,
+                                y * tileSize.y + y2 - wholeSize.y / 2,
                             tiles[x2, y2]);
                 }
             }
