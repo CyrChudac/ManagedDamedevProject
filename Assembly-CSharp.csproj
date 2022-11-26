@@ -56,12 +56,16 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CharacterController2D.cs" />
     <Compile Include="Assets\Tilemap-Shadow-Caster-main\Runtime\PathShadow.cs" />
     <Compile Include="Assets\TileAreas\TilemapCreator.cs" />
     <Compile Include="Assets\Tilemap-Shadow-Caster-main\Runtime\TilemapShadowCaster2D.cs" />
     <Compile Include="Assets\TileAreas\TileArea.cs" />
+    <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\EnemyController.cs" />
     <Compile Include="Assets\TileAreas\TileTypesToTiles.cs" />
     <Compile Include="Assets\Fire\FireFlicker.cs" />
+    <Compile Include="Assets\EnemyVision.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
