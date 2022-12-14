@@ -11,6 +11,7 @@ namespace TilemapShadowCaster.Editor
     {
         private SerializedProperty m_selfShadowsProperty;
         private SerializedProperty m_ApplyToSortingLayersProperty;
+        private SerializedProperty m_UseMesh;
 
         static string[] options;
 
@@ -18,6 +19,7 @@ namespace TilemapShadowCaster.Editor
         {
             m_selfShadowsProperty = serializedObject.FindProperty("m_SelfShadows");
             m_ApplyToSortingLayersProperty = serializedObject.FindProperty("m_ApplyToSortingLayers");
+            m_UseMesh = serializedObject.FindProperty("m_CreationType");
             options = SortingLayer.layers.Select(l => l.name).ToArray();
         }
 
@@ -30,6 +32,8 @@ namespace TilemapShadowCaster.Editor
             };
 
             EditorGUILayout.PropertyField(m_selfShadowsProperty, new GUIContent("Self Shadows"));
+
+            EditorGUILayout.PropertyField(m_UseMesh, new GUIContent("Creation Type", m_UseMesh.tooltip));
             
             if (serializedObject.hasModifiedProperties)
             {

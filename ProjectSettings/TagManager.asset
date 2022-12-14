@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - Walls
-  - 
-  - 
-  - 
-  - 
+  - Hider
+  - Enemy
+  - Climber
+  - Fire
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1968667573
+    locked: 0
+  - name: Ropes
+    uniqueID: 1971809627
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
