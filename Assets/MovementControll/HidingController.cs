@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class HidingController : MonoBehaviour
 {
-	[SerializeField] private SpriteRenderer renderer;
-	private Animator[] animators;
+	[SerializeField]
+	private AnimationController animator;
 	private HidingPlace current;
 	private bool started = false;
 
-	private void Awake() {
-		animators = GetComponentsInChildren<Animator>();
-	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.layer == LayerMask.NameToLayer("Hider"))
 			current = other.GetComponent<HidingPlace>();
 	}
+
 	private void OnTriggerExit2D(Collider2D other) {
 		if(current != null && other.gameObject.GetInstanceID() == current.gameObject.GetInstanceID())
 			current = null;
@@ -26,8 +24,8 @@ public class HidingController : MonoBehaviour
 		if(started || current == null) {
 			return false;
 		}
-		current.StartHide(gameObject, renderer, animators);
 		started = true;
+		current.StartHide(gameObject, animator);
 		return true;
 	}
 

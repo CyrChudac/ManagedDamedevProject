@@ -54,6 +54,7 @@ public class CharacterController2D : MonoBehaviour
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
+	private bool is_floating = false;
 	private float gravityScale;
 
 	private void Awake()
@@ -64,13 +65,11 @@ public class CharacterController2D : MonoBehaviour
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 	}
-
 	private void FixedUpdate() {
 		Grounding();
 		Ceiling();
 		Jumping();
 	}
-	bool is_floating = false;
 	private void Jumping() {
 		if(m_Rigidbody2D.transform.position.y - m_jumpAtY > m_JumpHeight) {
 			if(! is_floating) {
@@ -150,12 +149,14 @@ public class CharacterController2D : MonoBehaviour
 		if (jump || m_lastJumpButton + m_jumpRememberTime > Time.timeSinceLevelLoad)
 		{
 			if(CanJump() || forceJump) {
+ 				m_lastJumpTime = Time.timeSinceLevelLoad;
 				m_Grounded = false;
 				m_lastJumpButton = float.MinValue;
 				m_Rigidbody2D.gravityScale = 0;
+				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
 				m_jumpAtY = m_Rigidbody2D.transform.position.y;
 				m_Rigidbody2D.AddForce(new Vector2(0, m_JumpHeight/m_jumpTime), ForceMode2D.Impulse);
- 				m_lastJumpTime = Time.timeSinceLevelLoad;
+				OnJumpEvent.Invoke();
 			} else if(jump){
 				m_lastJumpButton = Time.timeSinceLevelLoad;
 			}
@@ -177,7 +178,7 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 	}
-	
+
 	private bool CanJump()
 		=> m_Grounded || m_lastGrounded + m_coyoteTime > Time.timeSinceLevelLoad;
 

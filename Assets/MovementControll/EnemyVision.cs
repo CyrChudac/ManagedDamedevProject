@@ -15,7 +15,7 @@ public class EnemyVision : MonoBehaviour
     [SerializeField]
     private LayerMask notSeeThrough;
     /// <summary>
-    ///what can the agent NOT see through 
+    ///what is the agent trying to spot
     /// </summary>
     [SerializeField] private LayerMask whatToSpot;
     /// <summary>

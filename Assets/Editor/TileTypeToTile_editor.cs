@@ -37,6 +37,7 @@ public class TileTypeToTile_editor : Editor
             var m = ((TileTypesToTiles)target).mapping;
             m.Clear();
             m.AddRange(dict.Select((t,i) => new MapTile() { type =(TileType)i, tile = t }));
+            EditorUtility.SetDirty(target);
         }
     }
 }

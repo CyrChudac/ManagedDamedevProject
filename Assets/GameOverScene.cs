@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOverScene : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class GameOverScene : MonoBehaviour
             Application.Quit();
         }
         else if(Input.anyKeyDown) {
-            SceneManager.LoadScene("PlayerPlayground");
+            MySceneManager.LoadScene("PlayerPlayground");
         }
     }
 }

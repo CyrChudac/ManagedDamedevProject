@@ -5,21 +5,15 @@ using UnityEngine;
 
 public class HidingPlace : MonoBehaviour
 {
-    [SerializeField] private float timeForHide = 0.3f;
+    [SerializeField] private float timeForHide = 0.2f;
     [SerializeField] private float timeForunhide = 0.1f;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    public float TimeForHide => timeForHide;
-    private static int ORDER_HIDEN = -6;
-    private int orderNormal;
+    [SerializeField] private string animationName = "hidingJump";
 
     private Sequence hidingTween;
-    private SpriteRenderer hiderSprite;
-    private GameObject hider;
-    private Animator[] characterAnimators;
+    private AnimationController characterAnimator;
     private Animator[] myAnimators;
 
 	private void Awake() {
-		spriteRenderer.sortingOrder = ORDER_HIDEN + 1;
         myAnimators = gameObject.GetComponentsInChildren<Animator>();
 	}
 
@@ -27,26 +21,22 @@ public class HidingPlace : MonoBehaviour
 	/// Starts Hiding animation of a given object by informing the given animator.
 	/// If no animator is given (null), just tweening will be used.
 	/// </summary>
-	public void StartHide(GameObject hider, SpriteRenderer sr, params Animator[] characterAnimators) {
-        this.hider = hider;
-        this.characterAnimators = characterAnimators;
-        orderNormal = sr.sortingOrder;
-        if(characterAnimators.Length != 0) {
-            characterAnimators.PlayInFixedTimeExt("Hiding", timeForHide);
-            sr.sortingOrder = ORDER_HIDEN;
-        } else {
+	public void StartHide(GameObject hidingCharacter, AnimationController characterAnimator) {
+        this.characterAnimator = characterAnimator;
+        characterAnimator.SetBool("hiding", true);
+        characterAnimator.SetFloat("hidingTime", 1 / timeForHide);
+        characterAnimator.SetTrigger(animationName);
+        {
             hidingTween = DOTween.Sequence()
-                .Append(hider.transform.DOMove(transform.position, timeForHide))
+                .Append(hidingCharacter.transform.DOMove(transform.position, timeForHide))
                 .OnComplete(() => {
                     hidingTween = null;
                     IsOccupied = true;
-                    sr.sortingOrder = ORDER_HIDEN;
                 });
         }
         if(myAnimators.Length > 0) {
             myAnimators.PlayInFixedTimeExt("Hiding", timeForHide);
         }
-        hiderSprite = sr;
     }
 
     /// <summary>
@@ -56,13 +46,9 @@ public class HidingPlace : MonoBehaviour
         if(hidingTween != null) {
             hidingTween.Kill();
             hidingTween = null;
-        } else {
-            characterAnimators.PlayInFixedTimeExt("Unhide", 0);
-            hiderSprite.sortingOrder = orderNormal;
         }
-        if(myAnimators != null) {
-            myAnimators.PlayInFixedTimeExt("BreakHiding", timeForHide);
-        }
+        characterAnimator.SetBool("hiding", false);
+        myAnimators.PlayInFixedTimeExt("BreakHiding", timeForHide);
     }
 
     /// <summary>
@@ -70,10 +56,7 @@ public class HidingPlace : MonoBehaviour
     /// </summary>
     public void GoOut() {
         IsOccupied = false;
-        if(characterAnimators.Length != 0) {
-            characterAnimators.PlayInFixedTimeExt("Unhide", timeForHide);
-        }
-        hiderSprite.sortingOrder = orderNormal;
+        characterAnimator.SetBool("hiding", false);
     }
 
     public bool IsOccupied { get; private set; } = false;

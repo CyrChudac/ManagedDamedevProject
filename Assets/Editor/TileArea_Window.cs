@@ -11,9 +11,12 @@ using System.ServiceModel.Security;
 
 public class TileArea_Window : EditorWindow
 {
+    private string name;
     public TileArea editing;
     private Vector2Int size;
     private Vector2Int start;
+    private Vector2Int hiderSpawn;
+    private List<Vector2Int> enemySpawns;
     private Vector2Int end;
     private float maxCharHeight;
     private float maxCharWidth;
@@ -34,6 +37,9 @@ public class TileArea_Window : EditorWindow
         maxCharHeight = editing.maxCharacterHeight;
         minJump = editing.minJumpSize;
         maxCharWidth = editing.maxCharacterWidth;
+        enemySpawns = editing.enemySpawns;
+        name = editing.name;
+        hiderSpawn = editing.hiderLocation;
 
         Resize(editing.Size);
 
@@ -108,6 +114,8 @@ public class TileArea_Window : EditorWindow
         editing.maxCharacterWidth = maxCharWidth;
         editing.minJumpSize = minJump;
         editing.openTo = (Side)openTo;
+        editing.enemySpawns = enemySpawns ?? new List<Vector2Int>();
+        editing.hiderLocation = hiderSpawn;
 
         EditorUtility.SetDirty(editing);
     }
@@ -118,39 +126,50 @@ public class TileArea_Window : EditorWindow
 
     public void OnGUI() {
         GUILayout.BeginHorizontal();
-            GUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
-            
-            var size2 = EditorGUILayout.Vector2IntField("size", size);
-            Resize(size2);
-            start = EditorGUILayout.Vector2IntField("start", start);
-            end = EditorGUILayout.Vector2IntField("end", end);
-            currDrawer = GUILayout.SelectionGrid(currDrawer, DrawerNames, 3);
-            openTo = EditorGUILayout.EnumFlagsField("open sides", openTo);
-            minJump = EditorGUILayout.FloatField("min jump size", minJump);
-            maxCharHeight = EditorGUILayout.FloatField("max character height", maxCharHeight);
-            maxCharWidth = EditorGUILayout.FloatField("max character width", maxCharWidth);
-            if(GUILayout.Button("create copy")) {
-                CreateCopy();
-            }
-            copyName = EditorGUILayout.TextField("copy name", copyName);
+        GUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
+        EditorGUILayout.LabelField(name, EditorStyles.boldLabel);
+        var size2 = EditorGUILayout.Vector2IntField("size", size);
+        Resize(size2);
+        start = EditorGUILayout.Vector2IntField("start", start);
+        end = EditorGUILayout.Vector2IntField("end", end);
+        currDrawer = GUILayout.SelectionGrid(currDrawer, DrawerNames, 3);
+        openTo = EditorGUILayout.EnumFlagsField("open sides", openTo);
+        minJump = EditorGUILayout.FloatField("min jump size", minJump);
+        maxCharHeight = EditorGUILayout.FloatField("max character height", maxCharHeight);
+        maxCharWidth = EditorGUILayout.FloatField("max character width", maxCharWidth);
+        if(GUILayout.Button("create copy")) {
+            CreateCopy();
+        }
+        copyName = EditorGUILayout.TextField("copy name", copyName);
+        hiderSpawn = EditorGUILayout.Vector2IntField("hider spawn", hiderSpawn);
 
-            GUILayout.EndVertical();
+        int spawnCount = EditorGUILayout.IntField("Enemy Spawners", enemySpawns.Count);
+        spawnCount = Mathf.Max(spawnCount, 1);
+        List<Vector2Int> spawns = new List<Vector2Int>();
+        bool isIn = true;
+        for(int i = 0; i < spawnCount; i++) {
+            isIn = isIn && i < enemySpawns.Count;
+            spawns.Add(EditorGUILayout.Vector2IntField(i.ToString(), isIn ? enemySpawns[i] : new Vector2Int()));
+        }
+        enemySpawns = spawns;
+
+        GUILayout.EndVertical();
             
-            GUILayout.BeginVertical();
-                GUILayout.BeginHorizontal("body", GUILayout.MaxHeight((size.y + 2) * TILE_SIZE));
-                values[currDrawer].Drawer.DrawBody();
+        GUILayout.BeginVertical();
+            GUILayout.BeginHorizontal("body", GUILayout.MaxHeight((size.y + 2) * TILE_SIZE));
+            values[currDrawer].Drawer.DrawBody();
+            GUILayout.EndHorizontal();
+
+            if(currDrawer == 0) {
+                GUILayout.BeginHorizontal();
+                values[currDrawer].Drawer.DrawWallify();
                 GUILayout.EndHorizontal();
+            }
 
-                if(currDrawer == 0) {
-                    GUILayout.BeginHorizontal();
-                    values[currDrawer].Drawer.DrawWallify();
-                    GUILayout.EndHorizontal();
-                }
-
-                GUILayout.BeginVertical("box");
-                values[currDrawer].Drawer.DrawConditions();
-                GUILayout.EndVertical();
+            GUILayout.BeginVertical("box");
+            values[currDrawer].Drawer.DrawConditions();
             GUILayout.EndVertical();
+        GUILayout.EndVertical();
         GUILayout.EndHorizontal();
     }
 }
@@ -178,11 +197,10 @@ class GridTileDrawer {
             if(!Values[x, y].Any(t => t.type == wall))
                 Values[x, y].Add((wall, new List<CondWrapper>()));
         }
-        for(int x = 0; x < size.x; x++) {
-            TryAddWall(x, 0);
+        for(int x = 1; x < size.x - 1; x++) {
             TryAddWall(x, size.y - 1);
         }
-        for(int y = 1; y < size.y - 1; y++) {
+        for(int y = 0; y < size.y; y++) {
             TryAddWall(0, y);
             TryAddWall(size.x - 1, y);
         }
@@ -326,7 +344,7 @@ class GridTileDrawer {
                 GUILayout.BeginHorizontal();
                 GUILayout.BeginVertical(GUILayout.Width(45));
                 if(GUILayout.Button("-", GUILayout.Width(40), GUILayout.Height(20))) {
-                    Values[selected.Value.x, selected.Value.y].RemoveAt(j);
+                    Values[selected.Value.x, selected.Value.y][i].cond.RemoveAt(j);
                     j--;
                     continue;
                 }

@@ -56,30 +56,41 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameMaster.cs" />
+    <Compile Include="Assets\AnimationController.cs" />
     <Compile Include="Assets\MovementControll\CharacterController2D.cs" />
     <Compile Include="Assets\MovementControll\Float_Extensions.cs" />
     <Compile Include="Assets\Tilemap-Shadow-Caster-main\Runtime\PathShadow.cs" />
     <Compile Include="Assets\GameOverScene.cs" />
-    <Compile Include="Assets\TileAreas\TilemapCreator.cs" />
+    <Compile Include="Assets\tiles\TileAreas\TilemapCreator.cs" />
     <Compile Include="Assets\Tilemap-Shadow-Caster-main\Runtime\TilemapShadowCaster2D.cs" />
-    <Compile Include="Assets\GameManager.cs" />
-    <Compile Include="Assets\TileAreas\TileArea.cs" />
+    <Compile Include="Assets\MySceneManager.cs" />
+    <Compile Include="Assets\ObjectFollower.cs" />
+    <Compile Include="Assets\tiles\TileAreas\TileArea.cs" />
+    <Compile Include="Assets\tiles\TileAreas\MapTile.cs" />
     <Compile Include="Assets\MovementControll\PlayerMovement.cs" />
     <Compile Include="Assets\MovementControll\HidingController.cs" />
     <Compile Include="Assets\Fire\FireController.cs" />
+    <Compile Include="Assets\MovementControll\ExtinguishObject.cs" />
     <Compile Include="Assets\MovementControll\ClimbingController.cs" />
     <Compile Include="Assets\MovementControll\EnemyController.cs" />
+    <Compile Include="Assets\MovementControll\MyInput.cs" />
+    <Compile Include="Assets\OptionsManager.cs" />
     <Compile Include="Assets\MovementControll\ExtinguishController.cs" />
     <Compile Include="Assets\MovementControll\HidingPlace.cs" />
-    <Compile Include="Assets\TileAreas\TileTypesToTiles.cs" />
+    <Compile Include="Assets\Stats.cs" />
+    <Compile Include="Assets\tiles\TileAreas\TileTypesToTiles.cs" />
+    <Compile Include="Assets\tiles\TileAreas\TilemapRefactorer.cs" />
     <Compile Include="Assets\MovementControll\EnemyVision.cs" />
     <Compile Include="Assets\Fire\FireFlicker.cs" />
+    <Compile Include="Assets\tiles\TileAreas\GroundTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\Cainos\Pixel Art Platformer - Village Props\Changelog.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />

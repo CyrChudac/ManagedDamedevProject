@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] HidingController hidingController;
     [SerializeField] ClimbingController climbingController;
     [SerializeField] ExtinguishController extinguishController;
+    [SerializeField] MyInput inputManager;
+    [SerializeField] AnimationController animationController;
+
 
     private bool jump;
     private float velocity_x;
@@ -19,19 +22,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         bool jump2;
-        velocity_x = Input.GetAxisRaw("Horizontal");
-        velocity_y = Input.GetAxisRaw("Vertical");
-        jump2 = Input.GetButtonDown("Jump");
+        velocity_x = inputManager.HorizontalAxis;
+        velocity_y = inputManager.VerticalAxis;
+        jump2 = inputManager.Jump;
         if(taken) {
             jump = jump2; 
             taken = false;
         } else {
             jump = jump || jump2;
         }
-        if(Input.GetButtonDown("Extinguish")) {
-            extinguishController.TryExtinguish(gameObject);
+        if(inputManager.Extinguish) {
+            extinguishController.TryExtinguish();
         }
-        if(Input.GetButtonDown("Hide")) {
+        if(inputManager.Hide) {
             hidingController.TryHide();
         }
         if(jump || velocity_y > 0 || (!hidingController.IsHiding && velocity_x != 0)){
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             }
             controller.Move(Hiding ? 0 : velocity_x * speed, velocity_x.Sign(), jump, forceJump: forceJump);
         }
+        animationController.IsClimbing = climbing;
         jump = false;
 	}
 }
