@@ -8,10 +8,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private CharacterController2D controller;
 	[SerializeField] private Transform frontGroundCheck;
 	[SerializeField] private float edgeWaitingTime = 0.5f;
-	[SerializeField] private float stopBeforeWall = 0.5f;
+	public float stopBeforeWall = 3f;
 	[SerializeField] private SpriteRenderer sizeProvider;
-	[SerializeField] private bool stopsOnEdge = true;
-	[SerializeField] private bool moving = true;
+	public bool stopsOnEdge = true;
+	public bool moving = true;
+	[SerializeField] private AnimationController animationController;
 
 	private float m_EdgeTimeStart = float.MinValue;
 	private bool m_waiting = false;
@@ -22,6 +23,48 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] private FireController myFire;
 	[SerializeField] private float lightUpDelay = 0.2f;
 	private float lightUpStart = float.MinValue;
+	[SerializeField] private LayerMask whatIsWall;
+
+	public void SetFireRadiusModifier(float radiusModifier)
+		=> myFire.Flicker.ModifiyBounds(radiusModifier);
+
+	[SerializeField] 
+	private EnemyVision myView;
+	public EnemyVision MyVision => myView;
+
+	bool m_spotting = false;
+
+	public void StartSpotting() {
+		m_spotting = true;
+	}
+
+	private float lastSpotting = float.MinValue;
+
+	public void StopSpotting() {
+		m_spotting = false;
+		lastSpotting = Time.timeSinceLevelLoad;
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if(collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
+			if (lastSpotting + 0.5f > Time.timeSinceLevelLoad) {
+				controller.Flip();
+				m_goingTo *= -1;
+			}
+		}
+	}
+
+
+	private Vector3 MidSpot
+		=> transform.position + (sizeProvider == null ? Vector3.zero : new Vector3(sizeProvider.bounds.size.x / 2, -sizeProvider.bounds.extents.y * 0.8f));
+
+	[SerializeField]
+	private bool shouldFlip;
+	public void FlipAfterStart() {
+		shouldFlip = true;
+	}
+
+	public void StopMovingForGood() => moving = false;
 
 	private void Start() {
 		IEnumerator Routine() {
@@ -29,19 +72,29 @@ public class EnemyController : MonoBehaviour
 			go.transform.SetParent(transform, false);
 			frontWallCheck = go;
 			yield return new WaitForEndOfFrame();
-			Vector3 offset = sizeProvider == null ? Vector3.zero : new Vector3(sizeProvider.bounds.size.x / 2, -sizeProvider.bounds.extents.y * 0.8f);
-			go.transform.position = transform.position + offset + Vector3.right * stopBeforeWall;
+			go.transform.position = MidSpot + Vector3.right * stopBeforeWall;
+			if(shouldFlip) {
+				m_goingTo = -1;
+				yield return new WaitForEndOfFrame();
+				controller.Flip();
+				//transform.localScale = new Vector3(
+				//	transform.localScale.x * -1,
+				//	transform.localScale.y,
+				//	transform.localScale.z);
+			}
 		}
 		StartCoroutine(Routine());
 	}
 
+
 	private void FixedUpdate() {
-		float speed = (! moving) || m_waiting || lightingUp ? 0 : Speed * m_goingTo;
+		float speed = 
+			(! moving) || startStoped || m_spotting || m_waiting || lightingUp ? 0 : Speed * m_goingTo;
 		controller.Move(speed, speed.Sign(), false, flipping: false);
 	}
 
 	private void Update() {
-		if(LightUpFire() || !moving)
+		if(startStoped || m_spotting || LightUpFire() || !moving)
 			return;
 		if(m_waiting) {
 			if(m_EdgeTimeStart + edgeWaitingTime < Time.timeSinceLevelLoad) {
@@ -49,14 +102,17 @@ public class EnemyController : MonoBehaviour
 				controller.Flip();
 				m_goingTo *= -1;
 			}
-		} else if(controller.Grounded && stopsOnEdge && ! controller.IsGrounded(frontGroundCheck.position)) {
+		} else if(controller.Grounded && stopsOnEdge && !controller.IsGrounded(frontGroundCheck.position)) {
 			m_waiting = true;
 			m_EdgeTimeStart = Time.timeSinceLevelLoad;
-		} else if(controller.Grounded && controller.IsGrounded(frontWallCheck.transform.position)){
-			m_waiting = true;
-			m_EdgeTimeStart = Time.timeSinceLevelLoad;
+		} else {
+			var dir = frontWallCheck.transform.position - MidSpot;
+			var hit = Physics2D.Raycast(MidSpot, dir.normalized, dir.magnitude, whatIsWall);
+			if(hit.collider != null) {
+				m_waiting = true;
+				m_EdgeTimeStart = Time.timeSinceLevelLoad;
+			}
 		}
-
 	}
 
 	bool LightUpFire() {
@@ -69,25 +125,26 @@ public class EnemyController : MonoBehaviour
 		}
 		IEnumerator Routine() {
 			float t = 0;
+
 			while(!myFire.IsOn) {
+				animationController.SetTrigger("lightUp");
+				animationController.SetFloat("LightUpSpeed", 1 / lightUpDelay);
 				lightingUp = true;
 				yield return new WaitForSeconds(Mathf.Max(t, lightUpDelay));
-				if(!myFire.IsOn)
+				if(!myFire.IsOn) {
+					animationController.SetTrigger("lightUpStop");
 					t = myFire.LightUp();
+				}
 				lightingUp = false;
 			}
 		}
 		if(! lightingUp)
 			StartCoroutine(Routine());
 		return lightingUp;
-		if(lightUpStart < 0) {
-			lightUpStart = Time.timeSinceLevelLoad;
-			lightingUp = true;
-		}
-		if(lightingUp && lightUpStart + lightUpDelay < Time.timeSinceLevelLoad) {
-			myFire.LightUp();
-			lightingUp = false;
-		}
-		return lightingUp;
 	}
+	
+	public void CanGoFirst() => startStoped = false;
+	[Header("for tutorial only - never use in actual level!")]
+	[SerializeField]
+	private bool startStoped = true;
 }

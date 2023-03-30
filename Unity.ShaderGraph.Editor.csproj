@@ -353,9 +353,9 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Drawing\Controls\IControlAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Data\Nodes\Utility\SplitTextureTransformNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Generation\Processors\ShaderGeneratorNames.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Data\Attributes\ContextFilterableAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Util\AssertHelpers.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Data\Util\StackPool.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Data\Attributes\ContextFilterableAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Drawing\MaterialGraphPreviewGenerator.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Data\Nodes\Math\Trigonometry\HyperbolicTangentNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.6\Editor\Data\Util\KeywordDependentCollection.cs" />
@@ -1070,6 +1070,9 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\Unity\2021.3.1f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>C:\Program Files\Unity\2021.3.1f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\2021.3.1f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
@@ -1117,6 +1120,12 @@
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\2021.3.1f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\2021.3.1f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\2021.3.1f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>

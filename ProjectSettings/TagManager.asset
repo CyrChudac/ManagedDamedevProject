@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - WorkaroundUI
   - Water
   - UI
   - Player
@@ -17,8 +17,8 @@ TagManager:
   - Enemy
   - Climber
   - Fire
-  - 
-  - 
+  - HiderFaller
+  - End
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: OptionsWutt
+    uniqueID: 553480359
     locked: 0

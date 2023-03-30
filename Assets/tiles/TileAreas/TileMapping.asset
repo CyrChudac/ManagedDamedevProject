@@ -24,6 +24,6 @@ MonoBehaviour:
   - type: 4
     tile: {fileID: 11400000, guid: 962526bdb42f1124a92382166d370ec9, type: 2}
   - type: 5
-    tile: {fileID: 11400000, guid: 60150eccf5bac124ba158913c76c331a, type: 2}
+    tile: {fileID: 11400000, guid: b4b1c0533703b3e41806f7ef7dbf08ba, type: 2}
   - type: 6
     tile: {fileID: 11400000, guid: 540a38db2bab9e04b8677e93c4e8b5cd, type: 2}

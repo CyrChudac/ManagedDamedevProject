@@ -2,12 +2,14 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HidingPlace : MonoBehaviour
 {
-    [SerializeField] private float timeForHide = 0.2f;
-    [SerializeField] private float timeForunhide = 0.1f;
+    public float timeForHide = 0.2f;
+    public float timeForUnhide = 0.1f;
     [SerializeField] private string animationName = "hidingJump";
+    public UnityEvent onHidden;
 
     private Sequence hidingTween;
     private AnimationController characterAnimator;
@@ -32,6 +34,7 @@ public class HidingPlace : MonoBehaviour
                 .OnComplete(() => {
                     hidingTween = null;
                     IsOccupied = true;
+                    onHidden.Invoke();
                 });
         }
         if(myAnimators.Length > 0) {

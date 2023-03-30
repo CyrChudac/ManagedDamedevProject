@@ -786,6 +786,9 @@ MonoBehaviour:
     _name: grab
     _width: 10
     _height: 7
+  enemySpawns:
+  - {x: 4, y: 3}
+  hiderLocation: {x: 7, y: 3}
   maxCharacterHeight: 2
   minJumpSize: 2
   maxCharacterWidth: 1

@@ -61,9 +61,6 @@ public class CharacterController2D : MonoBehaviour
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		gravityScale = m_Rigidbody2D.gravityScale;
-
-		if (OnLandEvent == null)
-			OnLandEvent = new UnityEvent();
 	}
 	private void FixedUpdate() {
 		Grounding();

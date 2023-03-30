@@ -13,6 +13,14 @@ public class OptionsManager : MonoBehaviour
 	private Slider _difChangeSlider;
 	[SerializeField]
 	private TMPro.TMP_InputField _difficulityField;
+	[SerializeField]
+	private Slider _fireQuality;
+	[SerializeField]
+	private Toggle _randomLights;
+	[SerializeField]
+	private TMPro.TMP_InputField _maxMapX;
+	[SerializeField]
+	private TMPro.TMP_InputField _maxMapY;
 	public void MusicChanged() {
 		Stats.Music = _musicSlider.value;
 	}
@@ -23,10 +31,27 @@ public class OptionsManager : MonoBehaviour
 		Stats.DifficulityChange = _difChangeSlider.value;
 	}
 	public void DifficulityChanged() {
-		Stats.Difficulity = float.Parse(_difficulityField.text);
+		if(float.TryParse(_difficulityField.text, out var val))
+			Stats.Difficulity = Mathf.Max(0, val);
 	}
+	public void FireQualityChanged() {
+		Stats.FireQuality = (int) _fireQuality.value;
+	}
+	public void RandomLightsChanged() {
+		Stats.RandomizedLightColors = _randomLights.isOn;
+	}
+	public void MaxMapXChanged() {
+		if(int.TryParse(_maxMapX.text, out var val))
+			Stats.MapMaxSize = new Vector2Int(Mathf.Max(1, val), Stats.MapMaxSize.y);
+	}
+	public void MaxMapYChanged() {
+		if(int.TryParse(_maxMapY.text, out var val))
+			Stats.MapMaxSize = new Vector2Int(Stats.MapMaxSize.x, Mathf.Max(1, val));
+	}
+
 	public void RestoreDefaults() {
 		Stats.FromInitial();
+		Start();
 	}
 
 	private void Start() {
@@ -34,5 +59,9 @@ public class OptionsManager : MonoBehaviour
 		_sfxSlider.value = Stats.Sfx;
 		_difChangeSlider.value = Stats.DifficulityChange;
 		_difficulityField.text = Stats.Difficulity.ToString("F2");
+		_fireQuality.value = Stats.FireQuality;
+		_randomLights.isOn = Stats.RandomizedLightColors;
+		_maxMapX.text = Stats.MapMaxSize.x.ToString();
+		_maxMapY.text = Stats.MapMaxSize.y.ToString();
 	}
 }

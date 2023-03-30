@@ -11,12 +11,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ExtinguishController extinguishController;
     [SerializeField] MyInput inputManager;
     [SerializeField] AnimationController animationController;
+    [SerializeField] float climbingCayote;
 
 
     private bool jump;
     private float velocity_x;
     private float velocity_y;
     private bool taken;
+    private float lastClimb = float.MinValue;
     public bool Hiding => hidingController.IsHiding;
 
     void Update()
@@ -48,12 +50,13 @@ public class PlayerMovement : MonoBehaviour
         if(!jump && velocity_x == 0 && (velocity_y != 0 || climbingController.IsClimbing))
             climbing = climbingController.TryClimb(velocity_y);
         if(!climbing){
-            bool forceJump = false;
+            bool forceJump = (lastClimb + climbingCayote > Time.timeSinceLevelLoad);
             if(climbingController.IsClimbing) {
                 climbingController.StopClimbing();
-                forceJump = true;
             }
             controller.Move(Hiding ? 0 : velocity_x * speed, velocity_x.Sign(), jump, forceJump: forceJump);
+        }else {
+            lastClimb = Time.timeSinceLevelLoad;
         }
         animationController.IsClimbing = climbing;
         jump = false;

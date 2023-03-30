@@ -2756,7 +2756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: peasant-body-red
+      name: peasant-body-blue-back
       rect:
         serializedVersion: 2
         x: 573
@@ -3790,15 +3790,14 @@ TextureImporter:
       peasant-leg2: 21300052
       peasant-front-arm1-orange: 21300138
       soldier-front-arm1: 21300006
-      peasant-body-red: 21300212
-      arrow: 21300128
       merchant-body-blue: 21300252
       rod: 21300170
       knight-leg2: 21300048
+      arrow: 21300128
       sword: 21300174
       knight-front-arm2: 21300002
-      knight-body-orange: 21300034
       hat-green: 21300276
+      knight-body-orange: 21300034
       priest-back-arm-blue: 21300060
       merchant-front-arm1-yellow: 21300190
       merchant-back-arm-red: 21300022
@@ -3844,6 +3843,7 @@ TextureImporter:
       priest-front-arm1-yellow: 21300184
       peasant-body-blue: 21300214
       priest-back-arm-yellow: 21300182
+      peasant-body-blue-back: 21300212
       knight-body-black: 21300040
       peasant-back-arm-black: 21300232
       peasant-front-arm1-yellow: 21300178

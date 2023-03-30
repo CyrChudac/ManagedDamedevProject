@@ -38,16 +38,46 @@ public class Stats : MonoBehaviour
             Save();
         }
     }
+    private static bool _randomizedLightColors;
+    public static bool RandomizedLightColors {
+        get => _randomizedLightColors;
+        set {
+            _randomizedLightColors = value;
+            Save();
+        }
+    }
+    private static Vector2Int _mapMaxSize;
+    public static Vector2Int MapMaxSize {
+        get => _mapMaxSize;
+        set {
+            _mapMaxSize = value;
+            Save();
+        }
+    }
+    private static int _fireQuality;
+    public static int FireQuality {
+        get => _fireQuality;
+        set {
+            _fireQuality = value;
+            Save();
+        }
+    }
     
     private static float staSfxInitial;
     private static float staMusicInitial;
     private static float staDifficulityInitial;
     private static float staDifficulityChangeInitial;
+    private static bool randomizedLightColorsInitial;
+    private static Vector2Int mapMaxSizeInitial;
+    private static int fireQualityInitial;
 
     [SerializeField] private float SfxInitial;
     [SerializeField] private float MusicInitial;
     [SerializeField] private float DifficulityInitial;
     [SerializeField] private float DifficulityChangeInitial;
+    [SerializeField] private bool RandomizedLightColorsInitial;
+    [SerializeField] private Vector2Int MapMaxSizeInitial;
+    [SerializeField] private int FireQualityInitial;
 
     private static string FilePath => Path.Combine(Application.persistentDataPath, "save.gtx");
     // Start is called before the first frame update
@@ -57,15 +87,19 @@ public class Stats : MonoBehaviour
         staMusicInitial = MusicInitial;
         staDifficulityChangeInitial= DifficulityChangeInitial;
         staDifficulityInitial = DifficulityInitial;
+        randomizedLightColorsInitial = RandomizedLightColorsInitial;
+        mapMaxSizeInitial = MapMaxSizeInitial;
+        fireQualityInitial = FireQualityInitial;
 
         if(File.Exists(FilePath)) {
-            using var sr = new StreamReader(FilePath);
             try {
+                using var sr = new StreamReader(FilePath);
                 Seri s = (Seri)JsonUtility.FromJson(sr.ReadToEnd(), typeof(Seri));
-                Sfx = s.Sfx;
-                Music = s.Music;
-                Difficulity = s.Difficulity;
-                DifficulityChange = s.DifficulityChange;
+                _sfx = s.Sfx;
+                _music = s.Music;
+                _difficulity = s.Difficulity;
+                _difficulityChange = s.DifficulityChange;
+                _randomizedLightColors = s.RandomizedColors;
             } catch(Exception) {
                 FromInitial();
             }
@@ -76,9 +110,12 @@ public class Stats : MonoBehaviour
 
     public static void FromInitial() {
         _sfx = staSfxInitial;
-        Music = staMusicInitial;
-        Difficulity = staDifficulityInitial;
-        DifficulityChange = staDifficulityChangeInitial;
+        _music = staMusicInitial;
+        _difficulity = staDifficulityInitial;
+        _difficulityChange = staDifficulityChangeInitial;
+        _randomizedLightColors = randomizedLightColorsInitial;
+        _mapMaxSize = mapMaxSizeInitial;
+        FireQuality = fireQualityInitial;//this saves
     }
 
     private static void Save() {
@@ -86,16 +123,26 @@ public class Stats : MonoBehaviour
             DifficulityChange = DifficulityChange,
             Difficulity = Difficulity,
             Music = Music,
-            Sfx = Sfx
+            Sfx = Sfx,
+            RandomizedColors = RandomizedLightColors,
+            MapMaxSize = MapMaxSize,
+            FireQuality = FireQuality
         }, true);
-        File.WriteAllText(FilePath, str);
+        lock(_lock) {
+            File.WriteAllText(FilePath, str);
+        }
     }
+
+    private static object _lock = new object();
 
     [Serializable]
     private class Seri {
-        public float Sfx { get; set; }
-        public float Music { get; set; }
-        public float Difficulity { get; set; }
-        public float DifficulityChange { get; set; }
+        public float Sfx;
+        public float Music;
+        public float Difficulity;
+        public float DifficulityChange;
+        public bool RandomizedColors;
+        public Vector2Int MapMaxSize;
+        public int FireQuality;
     }
 }

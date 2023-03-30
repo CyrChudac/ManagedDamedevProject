@@ -243,8 +243,8 @@
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Connections\UnitRelation.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\EditorBinding\UnitFooterPortsAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Framework\Logic\Negate.cs" />
-    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Framework\Events\GUI\OnPointerClick.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Framework\Graph\GetScriptGraph.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Framework\Events\GUI\OnPointerClick.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Connections\IUnitRelation.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Framework\Control\TryCatch.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Framework\Codebase\SetMember.cs" />

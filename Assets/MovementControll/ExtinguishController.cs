@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ExtinguishController : MonoBehaviour {
 	[SerializeField] private float extinguishCooldown = 5.0f;
-	[SerializeField] private GameObject windPrefab;
+	[SerializeField] private ExtinguishObject windPrefab;
 	[SerializeField] private AnimationController animator;
 
 	private float lastExtinguish = float.MinValue;
@@ -17,6 +17,7 @@ public class ExtinguishController : MonoBehaviour {
 		}
 		lastExtinguish = Time.timeSinceLevelLoad;
 		var obj = Instantiate(windPrefab);
+		obj.SetParticles(transform);
 		obj.transform.position = transform.position;
 		if(transform.localScale.x < 0) {
 			obj.transform.localScale = new Vector3(

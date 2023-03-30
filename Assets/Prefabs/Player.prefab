@@ -136,7 +136,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8007757075288861904}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -165,9 +165,10 @@ MonoBehaviour:
   speed: 1.2
   hidingController: {fileID: 8007757075288861912}
   climbingController: {fileID: 8007757075288861913}
-  extinguishController: {fileID: 0}
+  extinguishController: {fileID: 403933259500456826}
   inputManager: {fileID: 0}
   animationController: {fileID: 677002119}
+  climbingCayote: 0.15
 --- !u!114 &8007757075288861905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +250,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5676556196573378705}
   rigidbody: {fileID: 8007757075288861907}
+  jumpingThreshold: 0.005
+  fallingThreshold: 0.005
+  movementThreshold: 0.01
 --- !u!114 &403933259500456826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extinguishCooldown: 5
-  windPrefab: {fileID: 120399068133490592, guid: 4186051c750ee024c8d3ebfd9fc556cf, type: 3}
+  windPrefab: {fileID: 4791471043669267264, guid: f6403103042b8374cbeafd13fd7d5069, type: 3}
   animator: {fileID: 677002119}
 --- !u!1 &8007757075518480861
 GameObject:
@@ -368,6 +372,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thief
       objectReference: {fileID: 0}
+    - target: {fileID: 4000010598987170, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010976902124, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011004582212, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011565856400, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013297336500, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013306724104, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -418,6 +442,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013306724104, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013881505214, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 212000010614513294, guid: 13c470c5b8dcd4854834911f7e0a9a6c, type: 3}

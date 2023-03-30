@@ -788,8 +788,8 @@ MonoBehaviour:
     _width: 10
     _height: 7
   enemySpawns:
-  - {x: 4, y: 2}
-  hiderLocation: {x: 4, y: 2}
+  - {x: 4, y: 1}
+  hiderLocation: {x: 6, y: 1}
   maxCharacterHeight: 2
   minJumpSize: 2
   maxCharacterWidth: 1

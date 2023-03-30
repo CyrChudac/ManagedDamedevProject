@@ -11,6 +11,7 @@ public class ExtinguishObject : MonoBehaviour
     [SerializeField] private float windExistenceTime = 1.0f;
     [SerializeField] private float colliderWidth = 3.0f;
 	[SerializeField] private int rayCount = 50;
+    [SerializeField] private List<ParticleSystem> particleSystems;
 
 	private LayerMask fireLayer;
 	private LayerMask wallLayer;
@@ -21,6 +22,13 @@ public class ExtinguishObject : MonoBehaviour
 		fireLayer = LayerMask.GetMask("Fire");
 		wallLayer = LayerMask.GetMask("Walls");
         startTime = Time.time;
+    }
+
+    public void SetParticles(Transform obj) {
+        foreach(var ps in particleSystems) {
+            var main = ps.main;
+            main.customSimulationSpace = obj;
+        }
     }
 
 	public void OnDrawGizmos() {

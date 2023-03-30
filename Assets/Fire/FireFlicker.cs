@@ -15,6 +15,7 @@ public class FireFlicker : MonoBehaviour
     [SerializeField] private EnemyVision visionDistance;
     [Range(-1,1)]
     [SerializeField] private float visionModifier;
+    [SerializeField] private bool canBeRandomized = true;
 
     public bool IsOn { get; private set; } = true;
 
@@ -25,17 +26,38 @@ public class FireFlicker : MonoBehaviour
     float currMin;
     float addingDuration = -1;
     float shrinkingDuration = -1;
+    
+    public void ModifiyBounds(float modifier) {
+        max *= modifier;
+        min *= modifier;
+    }
 
     public void Extinguish(float duration) {
+        IsOn = false;
         addingDuration = -1;
         shrinkingDuration = duration;
         return;
     }
     public void LightUp(float duration) {
+        IsOn = true;
         shrinkingDuration = -1;
         addingDuration = duration;
         return;
     }
+
+    public void ColorSetting() {
+        if(Stats.RandomizedLightColors && canBeRandomized) {
+            var g = Random.value * 0.8f + 0.2f;
+            lightSource.color = new Color(
+                lightSource.color.r,
+                g,
+                1-g);
+        } else {
+            lightSource.color = startingColor;
+        }
+    }
+
+    private Color startingColor;
 
     private void Awake()
     {
@@ -45,6 +67,8 @@ public class FireFlicker : MonoBehaviour
             if (!TryGetComponent<UnityEngine.Rendering.Universal.Light2D>(out lightSource))
                 throw new UnassignedReferenceException("Light source not found");
         }
+        startingColor = lightSource.color;
+        ColorSetting();
         currMax = max;
         currMin = min;
         increasing = increasing = Random.value > 0.5f;
@@ -55,7 +79,7 @@ public class FireFlicker : MonoBehaviour
     {
         ShrinkAndAdd();
         float value;
-        if (lightSource.pointLightOuterRadius > currMax)
+        if (lightSource.pointLightOuterRadius > currMax || !IsOn)
         {
             increasing = false;
             value = currMax;
@@ -98,7 +122,6 @@ public class FireFlicker : MonoBehaviour
             currMin = Mathf.Max(0, currMin - minDif);
             currMax = Mathf.Max(0, currMax - maxDif);
             if(currMin == 0 && currMax == 0) {
-                IsOn = false;
                 shrinkingDuration = -1;
             }
         }else if(addingDuration > 0) {
@@ -107,7 +130,6 @@ public class FireFlicker : MonoBehaviour
             currMin = Mathf.Min(min, currMin + minDif);
             currMax = Mathf.Min(max, currMax + maxDif);
             if(currMin == min && currMax == max) {
-                IsOn = true;
                 addingDuration = -1;
             }
         }

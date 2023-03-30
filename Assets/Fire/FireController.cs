@@ -10,7 +10,9 @@ public class FireController : MonoBehaviour
     private Vector3 scale;
     [SerializeField] private GameObject fireObject;
     [SerializeField] private FireFlicker flicker;
+    public FireFlicker Flicker => flicker;
     Tween tween;
+    [SerializeField] private GameObject[] parts;
 
     public bool IsOn => flicker.IsOn;
 
@@ -33,8 +35,11 @@ public class FireController : MonoBehaviour
         return lightUpTime;
     }
 
-    void Awake()
+    public void Awake()
     {
+        for(int i = 0; i < parts.Length; i++) {
+            parts[i].SetActive(Stats.FireQuality >= i);
+        }
         scale = fireObject.transform.localScale;
     }
 

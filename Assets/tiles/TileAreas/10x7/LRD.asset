@@ -787,7 +787,7 @@ MonoBehaviour:
   enemySpawns:
   - {x: 7, y: 3}
   - {x: 1, y: 4}
-  hiderLocation: {x: 0, y: 0}
+  hiderLocation: {x: 1, y: 4}
   maxCharacterHeight: 2
   minJumpSize: 2
   maxCharacterWidth: 1

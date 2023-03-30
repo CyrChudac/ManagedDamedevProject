@@ -155,8 +155,10 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 
-      conditions: []
+    - tiles: 0000000001000000
+      conditions:
+      - conditions: []
+      - conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -800,6 +802,9 @@ MonoBehaviour:
     _name: grab
     _width: 10
     _height: 7
+  enemySpawns:
+  - {x: 6, y: 4}
+  hiderLocation: {x: 3, y: 4}
   maxCharacterHeight: 2
   minJumpSize: 2
   maxCharacterWidth: 1
