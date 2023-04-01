@@ -59,7 +59,7 @@ public class GameCreator : MonoBehaviour
     }
 
     private void DifficultyAdjust() {
-        var diffRatio = (-1 / (Stats.Difficulity * 0.15f + 1) + 1);
+        var diffRatio = (-1 / (Stats.Difficulity * 0.3f + 1) + 1);
         wholeSize = new Vector2Int(wholeSize.x + (int)((Stats.MapMaxSize.x - wholeSize.x) * diffRatio),
             wholeSize.y + (int)((Stats.MapMaxSize.y - wholeSize.y) * diffRatio));
     }
