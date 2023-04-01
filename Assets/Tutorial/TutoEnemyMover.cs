@@ -8,7 +8,6 @@ public class TutoEnemyMover : MonoBehaviour
 	private EnemyController enemy;
 
 	public void CanMove(bool value) {
-		Debug.Log("moving");
 		enemy.moving = value;
 	}
 }

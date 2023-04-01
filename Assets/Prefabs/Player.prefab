@@ -195,7 +195,7 @@ MonoBehaviour:
   - {fileID: 8007757075659147486}
   m_coyoteTime: 0.15
   m_jumpRememberTime: 0.3
-  m_JumpHeight: 4.1
+  m_JumpHeight: 3.1
   m_floatHeight: 0
   m_jumpFloatTime: 0.08
   m_jumpTime: 0.3
@@ -253,6 +253,7 @@ MonoBehaviour:
   jumpingThreshold: 0.005
   fallingThreshold: 0.005
   movementThreshold: 0.01
+  logMe: 0
 --- !u!114 &403933259500456826
 MonoBehaviour:
   m_ObjectHideFlags: 0

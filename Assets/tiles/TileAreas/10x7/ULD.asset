@@ -37,12 +37,17 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
-    - tiles: 01000000
+    - tiles: 0100000000000000
       conditions:
+      - conditions: []
       - conditions: []
     - tiles: 0000000001000000
       conditions:
-      - conditions: []
+      - conditions:
+        - _where: {x: 1, y: 1}
+          _positive: 1
+          _mandatory: 1
+          _what: 0
       - conditions: []
     - tiles: 
       conditions: []

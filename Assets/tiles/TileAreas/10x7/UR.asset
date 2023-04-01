@@ -79,105 +79,116 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 0000000001000000
+      conditions:
+      - conditions: []
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 0000000001000000
+      conditions:
+      - conditions: []
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 0000000001000000
+      conditions:
+      - conditions: []
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 0000000001000000
+      conditions:
+      - conditions: []
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
     - tiles: 0100000000000000
       conditions:
       - conditions: []
       - conditions: []
-    - tiles: 01000000
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 0100000000000000
       conditions:
       - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
       - conditions: []
     - tiles: 01000000
       conditions:
@@ -493,40 +504,21 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 0500000000000000
+    - tiles: 05000000
       conditions:
-      - conditions:
-        - _where: {x: 7, y: 1}
-          _positive: 0
-          _mandatory: 0
-          _what: 5
       - conditions: []
-    - tiles: 0500000000000000
+    - tiles: 05000000
       conditions:
-      - conditions:
-        - _where: {x: 1, y: 1}
-          _positive: 1
-          _mandatory: 1
-          _what: 5
       - conditions: []
-    - tiles: 0500000000000000
+    - tiles: 05000000
       conditions:
-      - conditions:
-        - _where: {x: 1, y: 2}
-          _positive: 1
-          _mandatory: 1
-          _what: 5
-        - _where: {x: 4, y: 2}
-          _positive: 0
-          _mandatory: 0
-          _what: 5
       - conditions: []
     - tiles: 0500000000000000
       conditions:
       - conditions:
         - _where: {x: 1, y: 3}
           _positive: 1
-          _mandatory: 1
+          _mandatory: 0
           _what: 5
       - conditions: []
     - tiles: 0500000000000000
@@ -534,9 +526,51 @@ MonoBehaviour:
       - conditions:
         - _where: {x: 1, y: 4}
           _positive: 1
-          _mandatory: 1
+          _mandatory: 0
           _what: 5
       - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 
       conditions: []
     - tiles: 
@@ -574,77 +608,6 @@ MonoBehaviour:
     - tiles: 0500000000000000
       conditions:
       - conditions: []
-      - conditions: []
-    - tiles: 0500000000000000
-      conditions:
-      - conditions:
-        - _where: {x: 4, y: 2}
-          _positive: 1
-          _mandatory: 1
-          _what: 5
-      - conditions: []
-    - tiles: 0500000000000000
-      conditions:
-      - conditions:
-        - _where: {x: 4, y: 3}
-          _positive: 1
-          _mandatory: 1
-          _what: 5
-      - conditions: []
-    - tiles: 05000000
-      conditions:
-      - conditions:
-        - _where: {x: 4, y: 4}
-          _positive: 1
-          _mandatory: 1
-          _what: 5
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 0500000000000000
-      conditions:
-      - conditions:
-        - _where: {x: 1, y: 1}
-          _positive: 0
-          _mandatory: 1
-          _what: 5
-      - conditions: []
-    - tiles: 0500000000000000
-      conditions:
-      - conditions:
-        - _where: {x: 7, y: 1}
-          _positive: 1
-          _mandatory: 1
-          _what: 5
       - conditions: []
     - tiles: 0500000000000000
       conditions:
@@ -652,10 +615,6 @@ MonoBehaviour:
         - _where: {x: 7, y: 2}
           _positive: 1
           _mandatory: 1
-          _what: 5
-        - _where: {x: 4, y: 2}
-          _positive: 0
-          _mandatory: 0
           _what: 5
       - conditions: []
     - tiles: 0500000000000000

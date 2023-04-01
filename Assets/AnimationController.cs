@@ -21,13 +21,23 @@ public class AnimationController : MonoBehaviour
     }
 
     public bool IsClimbing { get; set; }
+#if UNITY_EDITOR
+    [SerializeField]
+    private bool logMe = false;
+#endif
 
     private AnimState _curr = AnimState.idle;
     private AnimState Current {
         set {
             if (value != _curr) {
                 animator.ResetTrigger(AnimState.jumpFall.ToString());
+                animator.ResetTrigger(AnimState.idle.ToString());
+                animator.ResetTrigger(AnimState.walk.ToString());
                 animator.SetTrigger(value.ToString());
+#if UNITY_EDITOR
+                if(logMe)
+                    Debug.Log(value.ToString());
+#endif
             }
             _curr = value;
         }

@@ -18,7 +18,11 @@ public class EnemyCreator : MonoBehaviour
     [SerializeField]
     private AnimationCurve stopBeforeWallOverDifficulty;
     [SerializeField]
+    private AnimationCurve timeUntilCaughtOverDifficulty;
+    [SerializeField]
     private float stopBeforeWallMin = 1.5f;
+    [SerializeField]
+    private AudioMixerManager audioMixerManager;
     private List<EnemyController> created = new List<EnemyController>();
 
     public GameObject GetEnemy() {
@@ -28,7 +32,12 @@ public class EnemyCreator : MonoBehaviour
         e.moving = Random.value < GetTime(movingCurveOverDifficulty, Stats.Difficulity);
         if(Random.value < 0.5f)
             e.FlipAfterStart();
+
         e.MyVision.CaughtEvent.AddListener(gameMaster.GameOver);
+        e.MyVision.SpottedEvent.AddListener(audioMixerManager.Seen);
+        e.MyVision.UnsuspectingEvent.AddListener(audioMixerManager.Unseen);
+
+        e.MyVision.timeUntilCaught = GetTime(timeUntilCaughtOverDifficulty, Stats.Difficulity);
         e.Speed *= GetTime(speedChangeCurveOverDifficulty, Stats.Difficulity);
         e.stopBeforeWall = stopBeforeWallMin + (e.stopBeforeWall - stopBeforeWallMin) 
             * GetTime(stopBeforeWallOverDifficulty, Stats.Difficulity);

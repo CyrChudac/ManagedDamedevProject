@@ -21,6 +21,7 @@ public class ObjectFollower : MonoBehaviour
     [SerializeField] private DampingType damping;
     [Range(0f,0.95f)]
     [SerializeField] private float dampingForce = 1;
+    [SerializeField] private bool immediatelyToTarget = true;
 
     public Vector3 Offset => offset;
 
@@ -33,7 +34,8 @@ public class ObjectFollower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = PosCompute();
+        if(immediatelyToTarget)
+            transform.position = PosCompute();
     }
 
     // Update is called once per frame

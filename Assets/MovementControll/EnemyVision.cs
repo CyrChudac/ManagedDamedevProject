@@ -47,9 +47,10 @@ public class EnemyVision : MonoBehaviour
     /// </summary>
     [SerializeField] private Material viewMaterial;
     /// <summary>
-    /// The time it takes the agent to spot the the desired object.
+    /// The time it takes the agent to spot the the desired object. SET BY ENEMY CREATOR
     /// </summary>
-    [SerializeField] private float timeUntilCaught = 1f;
+    [Tooltip("Set by EnemyCreator!")]
+    public float timeUntilCaught = 1f;
     /// <summary>
     /// How much to decay within 1 sec. (1 = deacy all, infinity = decay instantly, 0 = do not decay)
     /// </summary>
@@ -67,9 +68,14 @@ public class EnemyVision : MonoBehaviour
     private MeshRenderer meshRenderer;
     
     [Header("Events")] //public so that they can be used from code as well
+    [Tooltip("Event triggered when the player is seen and was NOT seen before.")]
     public UnityEvent SpottedEvent;
+    [Tooltip("Event triggered when the player is NOT seen anymore, but was seen before.")]
     public UnityEvent UnseenEvent;
+    [Tooltip("Event triggered when the enemy sees the player for " + nameof(timeUntilCaught) +" time.")]
     public UnityEvent CaughtEvent;
+    [Tooltip("Event triggered when the enemy stops suspecting anything.")]
+    public UnityEvent UnsuspectingEvent;
     
 
     /// <summary>
@@ -257,6 +263,9 @@ public class EnemyVision : MonoBehaviour
 	/// </summary>
 	private void SetInvestigationRate(float rate)
     {
+        if(investigationRate != 0 && rate == 0) {
+            UnsuspectingEvent.Invoke();
+        }
         investigationRate = rate;
         meshRenderer.material.color = Color.Lerp(OkView, RIPView, Mathf.Clamp01(rate));
     }

@@ -120,9 +120,6 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
     - tiles: 
       conditions: []
     - tiles: 
@@ -135,6 +132,8 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -164,6 +163,10 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -179,18 +182,10 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -602,10 +597,8 @@ MonoBehaviour:
     - tiles: 05000000
       conditions:
       - conditions: []
-    - tiles: 0500000000000000
-      conditions:
-      - conditions: []
-      - conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 
       conditions: []
     - tiles: 

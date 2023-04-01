@@ -75,25 +75,25 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 0000000001000000
       conditions:
       - conditions: []
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
       - conditions: []
     - tiles: 
       conditions: []

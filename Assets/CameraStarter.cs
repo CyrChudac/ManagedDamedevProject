@@ -12,12 +12,14 @@ public class CameraStarter : MonoBehaviour
     private float distance = 10;
     [SerializeField] 
     private GameObject camera;
+    [SerializeField] 
+    private Vector3 offset = new Vector3(0,0,-10);
     // Start is called before the first frame update
     void Start()
     {
         var dir = new Vector3((Random.value - 0.5f) * 200, (Random.value-0.5f) * 200);
         dir.Normalize();
-        camera.transform.position = player.transform.position + dir * distance;
+        camera.transform.position = player.transform.position + dir * distance + offset;
         Destroy(this);
     }
 

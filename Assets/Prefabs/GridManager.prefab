@@ -593,13 +593,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marginAround: 20
   mapping: {fileID: 11400000, guid: a7c6a5212e53d50478ce90ffe3c5fa3f, type: 2}
-  endTile: {fileID: 11400000, guid: 5b8f6aa93dd573a4b98e3577e01a50c9, type: 2}
   groundTilemap: {fileID: 3152739254756113533}
   climbTilemap: {fileID: 3152739253284205695}
   foregroundTilemap: {fileID: 3152739254634651699}
   backgroundTilemap: {fileID: 3152739254461878721}
   grabTilemap: {fileID: 3152739252806166704}
-  endTilemap: {fileID: 0}
 --- !u!1 &3152739254756113520
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +713,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

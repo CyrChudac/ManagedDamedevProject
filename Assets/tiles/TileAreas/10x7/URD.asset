@@ -41,9 +41,8 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 
       conditions: []
     - tiles: 
@@ -503,8 +502,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 
-      conditions: []
+    - tiles: 05000000
+      conditions:
+      - conditions: []
     - tiles: 05000000
       conditions:
       - conditions: []
@@ -550,13 +550,10 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 05000000
-      conditions:
-      - conditions: []
-    - tiles: 0000000005000000
-      conditions:
-      - conditions: []
-      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 00000000
       conditions:
       - conditions: []

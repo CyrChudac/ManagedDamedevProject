@@ -20,8 +20,9 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
-    - tiles: 01000000
+    - tiles: 0100000000000000
       conditions:
+      - conditions: []
       - conditions: []
     - tiles: 
       conditions: []
@@ -29,25 +30,13 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 01000000
+    - tiles: 0100000000000000
       conditions:
+      - conditions: []
       - conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -61,41 +50,6 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
-    - tiles: 
-      conditions: []
-    - tiles: 01000000
-      conditions:
-      - conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -129,6 +83,56 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 0100000000000000
+      conditions:
+      - conditions: []
+      - conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 
+      conditions: []
+    - tiles: 01000000
+      conditions:
+      - conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -164,8 +168,9 @@ MonoBehaviour:
     - tiles: 01000000
       conditions:
       - conditions: []
-    - tiles: 01000000
+    - tiles: 0100000000000000
       conditions:
+      - conditions: []
       - conditions: []
     - tiles: 
       conditions: []
@@ -173,8 +178,10 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 
-      conditions: []
+    - tiles: 0000000001000000
+      conditions:
+      - conditions: []
+      - conditions: []
     - tiles: 01000000
       conditions:
       - conditions: []
@@ -590,11 +597,19 @@ MonoBehaviour:
       - conditions: []
     - tiles: 0500000000000000
       conditions:
-      - conditions: []
+      - conditions:
+        - _where: {x: 7, y: 1}
+          _positive: 1
+          _mandatory: 0
+          _what: 5
       - conditions: []
     - tiles: 0500000000000000
       conditions:
-      - conditions: []
+      - conditions:
+        - _where: {x: 7, y: 2}
+          _positive: 1
+          _mandatory: 0
+          _what: 5
       - conditions: []
     - tiles: 0500000000000000
       conditions:

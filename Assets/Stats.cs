@@ -26,7 +26,7 @@ public class Stats : MonoBehaviour
     public static float Difficulity{
         get => _difficulity;
         set {
-            _difficulity = value;
+            _difficulity = Mathf.Max(0, value);
             Save();
         }
     }
@@ -50,7 +50,10 @@ public class Stats : MonoBehaviour
     public static Vector2Int MapMaxSize {
         get => _mapMaxSize;
         set {
-            _mapMaxSize = value;
+
+            _mapMaxSize = new Vector2Int(
+                Mathf.Clamp(value.x, minMaxMapSize.x, maxMaxMapSize.x), 
+                Mathf.Clamp(value.y, minMaxMapSize.y, maxMaxMapSize.y));
             Save();
         }
     }
@@ -70,6 +73,8 @@ public class Stats : MonoBehaviour
     private static bool randomizedLightColorsInitial;
     private static Vector2Int mapMaxSizeInitial;
     private static int fireQualityInitial;
+    private static Vector2Int maxMaxMapSize;
+    private static Vector2Int minMaxMapSize;
 
     [SerializeField] private float SfxInitial;
     [SerializeField] private float MusicInitial;
@@ -78,11 +83,16 @@ public class Stats : MonoBehaviour
     [SerializeField] private bool RandomizedLightColorsInitial;
     [SerializeField] private Vector2Int MapMaxSizeInitial;
     [SerializeField] private int FireQualityInitial;
+    [SerializeField] private Vector2Int MaxMaxMapSize = new Vector2Int(50, 50);
+    [SerializeField] private Vector2Int MinMaxMapSize = new Vector2Int(13, 13);
 
     private static string FilePath => Path.Combine(Application.persistentDataPath, "save.gtx");
     // Start is called before the first frame update
     void Start()
     {
+        maxMaxMapSize = MaxMaxMapSize;
+        minMaxMapSize = MinMaxMapSize;
+
         staSfxInitial = SfxInitial;
         staMusicInitial = MusicInitial;
         staDifficulityChangeInitial= DifficulityChangeInitial;
@@ -100,6 +110,8 @@ public class Stats : MonoBehaviour
                 _difficulity = s.Difficulity;
                 _difficulityChange = s.DifficulityChange;
                 _randomizedLightColors = s.RandomizedColors;
+                _mapMaxSize = s.MapMaxSize;
+                _fireQuality = s.FireQuality;
             } catch(Exception) {
                 FromInitial();
             }

@@ -165,8 +165,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 01000000
+    - tiles: 0100000000000000
       conditions:
+      - conditions: []
       - conditions: []
     - tiles: 01000000
       conditions:
@@ -182,8 +183,9 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 01000000
+    - tiles: 0100000000000000
       conditions:
+      - conditions: []
       - conditions: []
     - tiles: 01000000
       conditions:
@@ -781,7 +783,7 @@ MonoBehaviour:
     _width: 10
     _height: 7
   enemySpawns:
-  - {x: 4, y: 1}
+  - {x: 5, y: 1}
   hiderLocation: {x: 5, y: 1}
   maxCharacterHeight: 2
   minJumpSize: 2

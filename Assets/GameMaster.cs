@@ -24,7 +24,13 @@ public class GameMaster : MonoBehaviour
 
     private bool alreadyEnding = false;
 
-    public void GameOver() {
+    public void GameOverToScene(string name)
+        => GameOver(sm => MySceneManager.LoadScene(name));
+
+    public void GameOver()
+        => GameOver(sm => sm.GameOver());
+
+    private void GameOver(Action<MySceneManager> toDo) {
         if(alreadyEnding) return;
         alreadyEnding = true;
         input.StopAll();
@@ -36,7 +42,7 @@ public class GameMaster : MonoBehaviour
             var ec = Instantiate(gameOverCourtain);
             ec.transform.position = playerAnimations.transform.position;
             yield return new WaitForSeconds(waitAfterCourtain);
-            sceneManager.GameOver();
+            toDo(sceneManager);
         }
         StartCoroutine(EndRoutine());
     }

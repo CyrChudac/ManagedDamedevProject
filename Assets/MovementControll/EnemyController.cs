@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] private float edgeWaitingTime = 0.5f;
 	public float stopBeforeWall = 3f;
 	[SerializeField] private SpriteRenderer sizeProvider;
+	[SerializeField] private Transform topObj;
+	[SerializeField] private Transform botObj;
 	public bool stopsOnEdge = true;
 	public bool moving = true;
 	[SerializeField] private AnimationController animationController;
@@ -23,7 +25,7 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] private FireController myFire;
 	[SerializeField] private float lightUpDelay = 0.2f;
 	private float lightUpStart = float.MinValue;
-	[SerializeField] private LayerMask whatIsWall;
+	[SerializeField] private LayerMask whatMakesMeTurn;
 
 	public void SetFireRadiusModifier(float radiusModifier)
 		=> myFire.Flicker.ModifiyBounds(radiusModifier);
@@ -58,6 +60,12 @@ public class EnemyController : MonoBehaviour
 	private Vector3 MidSpot
 		=> transform.position + (sizeProvider == null ? Vector3.zero : new Vector3(sizeProvider.bounds.size.x / 2, -sizeProvider.bounds.extents.y * 0.8f));
 
+	private IEnumerable<Vector3> InnerFrontWallChecks() {
+		yield return topObj.transform.position;
+		yield return MidSpot;
+		yield return botObj.transform.position;
+	}
+
 	[SerializeField]
 	private bool shouldFlip;
 	public void FlipAfterStart() {
@@ -77,10 +85,6 @@ public class EnemyController : MonoBehaviour
 				m_goingTo = -1;
 				yield return new WaitForEndOfFrame();
 				controller.Flip();
-				//transform.localScale = new Vector3(
-				//	transform.localScale.x * -1,
-				//	transform.localScale.y,
-				//	transform.localScale.z);
 			}
 		}
 		StartCoroutine(Routine());
@@ -106,11 +110,14 @@ public class EnemyController : MonoBehaviour
 			m_waiting = true;
 			m_EdgeTimeStart = Time.timeSinceLevelLoad;
 		} else {
-			var dir = frontWallCheck.transform.position - MidSpot;
-			var hit = Physics2D.Raycast(MidSpot, dir.normalized, dir.magnitude, whatIsWall);
-			if(hit.collider != null) {
-				m_waiting = true;
-				m_EdgeTimeStart = Time.timeSinceLevelLoad;
+			foreach(var spot in InnerFrontWallChecks()) {
+				var dir = frontWallCheck.transform.position - spot;
+				var hit = Physics2D.Raycast(spot, dir.normalized, dir.magnitude, whatMakesMeTurn);
+				if(hit.collider != null) {
+					m_waiting = true;
+					m_EdgeTimeStart = Time.timeSinceLevelLoad;
+					break;
+				}
 			}
 		}
 	}

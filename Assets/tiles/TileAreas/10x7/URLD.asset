@@ -546,9 +546,8 @@ MonoBehaviour:
       conditions: []
     - tiles: 
       conditions: []
-    - tiles: 05000000
-      conditions:
-      - conditions: []
+    - tiles: 
+      conditions: []
     - tiles: 
       conditions: []
     - tiles: 

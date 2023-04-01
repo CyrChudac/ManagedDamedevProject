@@ -21,8 +21,12 @@ public class OptionsManager : MonoBehaviour
 	private TMPro.TMP_InputField _maxMapX;
 	[SerializeField]
 	private TMPro.TMP_InputField _maxMapY;
+	[SerializeField]
+	private AudioSource audioSource;
 	public void MusicChanged() {
 		Stats.Music = _musicSlider.value;
+		audioSource.volume = Stats.Music;
+
 	}
 	public void SfxChanged() {
 		Stats.Sfx = _sfxSlider.value;
@@ -42,11 +46,13 @@ public class OptionsManager : MonoBehaviour
 	}
 	public void MaxMapXChanged() {
 		if(int.TryParse(_maxMapX.text, out var val))
-			Stats.MapMaxSize = new Vector2Int(Mathf.Max(1, val), Stats.MapMaxSize.y);
+			Stats.MapMaxSize = new Vector2Int(val, Stats.MapMaxSize.y);
+		_maxMapX.text = Stats.MapMaxSize.x.ToString();
 	}
 	public void MaxMapYChanged() {
 		if(int.TryParse(_maxMapY.text, out var val))
-			Stats.MapMaxSize = new Vector2Int(Stats.MapMaxSize.x, Mathf.Max(1, val));
+			Stats.MapMaxSize = new Vector2Int(Stats.MapMaxSize.x, val);
+		_maxMapY.text = Stats.MapMaxSize.y.ToString();
 	}
 
 	public void RestoreDefaults() {
