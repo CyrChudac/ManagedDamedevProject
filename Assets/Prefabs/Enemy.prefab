@@ -41,7 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2604458294722689513}
   - component: {fileID: 4988751324498944475}
-  m_Layer: 14
+  - component: {fileID: 8511536342767348301}
+  m_Layer: 8
   m_Name: BackTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +90,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.69670796, y: 5.934103}
   m_EdgeRadius: 0
+--- !u!114 &8511536342767348301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418435009637195281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d47181e4e4f30240a728f59f58513ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5030483643137596618}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: BackTriggerEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  layerThatActivates: Player
 --- !u!1 &5030483643137596597
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,13 +468,15 @@ MonoBehaviour:
   viewDistance: 10
   viewAngle: 60
   displayViewcone: 1
-  viewRaysModifier: 3
+  viewRaysModifier: 50
   OkView: {r: 0.5, g: 0.5, b: 0.5, a: 0}
   RIPView: {r: 1, g: 0, b: 0, a: 0.43137255}
   viewMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   timeUntilCaught: 0.9
   spottingDecay: 0.2
   animationController: {fileID: 2857664116969311200}
+  playerMaxSize: 3
+  player: {fileID: 0}
   SpottedEvent:
     m_PersistentCalls:
       m_Calls:

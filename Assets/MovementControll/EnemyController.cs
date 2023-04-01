@@ -47,12 +47,10 @@ public class EnemyController : MonoBehaviour
 		lastSpotting = Time.timeSinceLevelLoad;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision) {
-		if(collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
-			if (lastSpotting + 0.5f > Time.timeSinceLevelLoad) {
-				controller.Flip();
-				m_goingTo *= -1;
-			}
+	public void BackTriggerEnter() {
+		if (lastSpotting + 0.5f > Time.timeSinceLevelLoad) {
+			controller.Flip();
+			m_goingTo *= -1;
 		}
 	}
 

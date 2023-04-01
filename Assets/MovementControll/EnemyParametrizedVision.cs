@@ -40,8 +40,12 @@ public class EnemyParametrizedVision : EnemyVision
         return Mathf.Max(dist, minViewDistance);
 	}
 
+	protected override float GetMaxLength() {
+		return lightSource.pointLightOuterRadius;
+	}
+
 	// Find the points of intersection.
-    private int FindLineCircleIntersections(
+	private int FindLineCircleIntersections(
         float cx, float cy, float radius,
         Vector2 point1, Vector2 point2,
         out Vector2 intersection1, out Vector2 intersection2)

@@ -23,6 +23,8 @@ public class EnemyCreator : MonoBehaviour
     private float stopBeforeWallMin = 1.5f;
     [SerializeField]
     private AudioMixerManager audioMixerManager;
+    [SerializeField]
+    private GameObject player;
     private List<EnemyController> created = new List<EnemyController>();
 
     public GameObject GetEnemy() {
@@ -38,6 +40,7 @@ public class EnemyCreator : MonoBehaviour
         e.MyVision.UnsuspectingEvent.AddListener(audioMixerManager.Unseen);
 
         e.MyVision.timeUntilCaught = GetTime(timeUntilCaughtOverDifficulty, Stats.Difficulity);
+        e.MyVision.player = player;
         e.Speed *= GetTime(speedChangeCurveOverDifficulty, Stats.Difficulity);
         e.stopBeforeWall = stopBeforeWallMin + (e.stopBeforeWall - stopBeforeWallMin) 
             * GetTime(stopBeforeWallOverDifficulty, Stats.Difficulity);
